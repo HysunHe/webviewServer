@@ -57,15 +57,15 @@ function handlePostRequest(req, res) {
     let amountE = payload.parameters.filter( e => e.key === 'amount' );
     let targetActionE = payload.parameters.filter( e => e.key === 'targetAction' );
     let callbackE = payload.parameters.filter( e => e.key === 'webview.onDone' );
-    utils.debugLog('callback url: ' + callbackE.value, callbackE);
+    utils.debugLog('callback url: ' + callbackE ? callbackE[0].value : "NA", callbackE);
 
     axios.post(saveParamServiceUrl, {
-        userName: userNameE ? userNameE.value : "",
-        account: accountE? accountE.value : "",
-        bankBranch: branchE ? branchE.value : "",
-        amount: amountE ? amountE.value : "",
-        targetAction: targetActionE ? targetActionE.value : "",
-        callbackUrl: callbackE ? callbackE.value : ""
+        userName: userNameE ? userNameE[0].value : "",
+        account: accountE? accountE[0].value : "",
+        bankBranch: branchE ? branchE[0].value : "",
+        amount: amountE ? amountE[0].value : "",
+        targetAction: targetActionE ? targetActionE[0].value : "",
+        callbackUrl: callbackE ? callbackE[0].value : ""
     }).then(function(response) {
         utils.debugLog("Saved parameters: ", response.data)
         const resbody = {
