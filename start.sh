@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-docker stop odaqr
-docker rm odaqr
+docker stop webviewServer
+docker rm webviewServer
 
 docker run -d \
     --restart=always \
-    --name=odaqr \
+    --name=webviewServer \
     -p 8890:3001 \
-    hysunhe/odaqr:latest
+    hysunhe/webviewServer:latest

@@ -7,17 +7,12 @@ const utils = require('./utils.js');
 const axios = require('axios');
 
 let postParamsPath;
-let serviceUrl;
 let saveParamServiceUrl;
 let localServicePort;
 let webviewUrl;
 
 let setPostParamsPath = function(path) {
     postParamsPath = path;
-};
-
-let setServiceUrl = function(url) {
-    serviceUrl = url;
 };
 
 let setServicePort = function(port) {
@@ -41,16 +36,7 @@ let createWebviewServer = function() {
         utils.debugLog('Error: please specify the path for posting webview input parameters');
         process.exit(1);
     }
-    if (!serviceUrl) {
-        fqdn(function(err, res) {
-            if (err) {
-                utils.debugLog('Error: unable to get the fully qualified domain name of the server');
-                process.exit(1);
-            }
-            serviceUrl = 'http://' + res;
-        });
-    }
-    utils.debugLog('Webview service starting on: ' + serviceUrl + ', port: ' + localServicePort);
+    utils.debugLog('Webview service starting on port: ' + localServicePort);
 
     const app = express();
     app.use(bodyParser.json());
@@ -94,7 +80,6 @@ function handlePostRequest(req, res) {
 module.exports = {
     "createServer": createWebviewServer,
     "setPostParamsPath": setPostParamsPath,
-    "setServiceUrl": setServiceUrl,
     "setServicePort": setServicePort,
     "getServicePort": getServicePort,
     "setSaveParamServiceUrl": setSaveParamServiceUrl,
