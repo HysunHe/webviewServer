@@ -58,22 +58,21 @@ function handlePostRequest(req, res) {
     let targetActionE = payload.parameters.filter( e => e.key === 'targetAction' );
     let callbackE = payload.parameters.filter( e => e.key === 'webview.onDone' );
 
-    let response = axios.post(saveParamServiceUrl, {
+    axios.post(saveParamServiceUrl, {
         userName: userNameE ? userNameE.value : "",
         account: accountE? accountE.value : "",
         bankBranch: branchE ? branchE.value : "",
         amount: amountE ? amountE.value : "",
         targetAction: targetActionE ? targetActionE.value : "",
         callbackUrl: callbackE ? callbackE.value : ""
+    }).then(function(response) {
+        utils.debugLog("Saved parameters: ", response.data)
+        const resbody = {
+            'webview.url': webviewUrl + "?token=" + response.data.ID
+        };
+        utils.debugLog('Response body: ' + JSON.stringify(resbody));
+        res.json(resbody);
     });
-    utils.debugLog("Saved parameters: ", response.data)
-    
-    const resbody = {
-        'webview.url': webviewUrl + "?token=" + response.data.ID
-    };
-
-    utils.debugLog('Response body: ' + JSON.stringify(resbody));
-    res.json(resbody);
 }
 
 module.exports = {
