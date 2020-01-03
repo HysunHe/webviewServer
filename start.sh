@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-docker stop webviewServer
-docker rm webviewServer
+docker stop webviewserver
+docker rm webviewserver
 
 docker run -d \
     --restart=always \
-    --name=webviewServer \
+    --name=webviewserver \
     -p 8892:3001 \
-    hysunhe/webviewServer:latest
+    hysunhe/webviewserver:latest
