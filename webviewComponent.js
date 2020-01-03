@@ -57,6 +57,7 @@ function handlePostRequest(req, res) {
     let amountE = payload.parameters.filter( e => e.key === 'amount' );
     let targetActionE = payload.parameters.filter( e => e.key === 'targetAction' );
     let callbackE = payload.parameters.filter( e => e.key === 'webview.onDone' );
+    utils.debugLog('callback url: ' + callbackE.value, callbackE);
 
     axios.post(saveParamServiceUrl, {
         userName: userNameE ? userNameE.value : "",
