@@ -6,5 +6,5 @@ docker rm webviewServer
 docker run -d \
     --restart=always \
     --name=webviewServer \
-    -p 8890:3001 \
+    -p 8892:3001 \
     hysunhe/webviewServer:latest
