@@ -2,7 +2,6 @@
 
 const bodyParser = require('body-parser');
 const express = require('express');
-const fqdn = require('fqdn');
 const utils = require('./utils.js');
 const axios = require('axios');
 
@@ -67,7 +66,7 @@ function handlePostRequest(req, res) {
         targetAction: targetActionE ? targetActionE.value : "",
         callbackUrl: callbackE ? callbackE.value : ""
     });
-    debugLog("Saved parameters: ", response.data)
+    utils.debugLog("Saved parameters: ", response.data)
     
     const resbody = {
         'webview.url': webviewUrl + "?token=" + response.data.ID
